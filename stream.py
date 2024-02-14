@@ -16,7 +16,7 @@ files_ts = [
 ]
 
 if not os.path.exists(os.path.join(folder, files[0])):
-    raise ValueError("you're an donkey.")
+    raise ValueError("you're a donkey.")
 
 
 def replay_gtcommand():
