@@ -18,6 +18,7 @@ class BaseConverter:
         Args:
             ip_server (str): ip adress of output socket. Defaults to "127.0.0.1".
             port_server (int): port of output socket. Defaults to 42042.
+            dict_flg (bool, optional): Set True for GtCommand, False for ecos. Defaults to True.
         """
         self.ip_server: str = ip_server
         self.port_server: int = port_server
