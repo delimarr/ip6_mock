@@ -1,2 +1,3 @@
 # Start Mock Betriebsanlage, DAB
-run stream.py
+- use same venv as ebl_coords
+- run stream.py before starting ebl_coords
