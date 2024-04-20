@@ -50,12 +50,8 @@ class ReplayConverter(BaseConverter):
                     pass
             misc_idx = row.index.difference(["x", "y", "z", "pc_timestamp"])
             if self.raw_flg:
-                self.raw_buffer.put(
-                    row.to_string(header=False, index=False)
-                    .replace("\n", ",")
-                    .replace(" ", "")
-                    + ";"
-                )
+                msg = row[1:].to_string(header=False, index=False).replace("\n", ",").replace(" ", "") + ";"
+                self.raw_buffer.put(msg)
             else:
                 self.buffer.put(
                     ConverterOuput(now_ms(), row.x, row.y, row.z, dict(row[misc_idx]))

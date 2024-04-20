@@ -5,6 +5,7 @@ from typing import List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
+import pyvista as pv
 from scipy.signal import medfilt
 from scipy.spatial.distance import cdist
 
@@ -51,3 +52,18 @@ def get_df(
                 df.drop(columns=[col], inplace=True)
 
     return df
+
+def get_cloud(df: pd.DataFrame) -> pv.PolyData:
+    """Get PolyData cloud from Dataframe and do sanity check.
+
+    Args:
+        df (pd.DataFrame): Dataframe containing x, y, z columns.
+
+    Returns:
+        pv.PolyData: pyvista cloud.
+    """
+    points = df[["x", "y", "z"]].to_numpy(dtype=np.float32)
+    points = pv.pyvista_ndarray(points)
+    cloud = pv.PolyData(points)
+    np.allclose(points, cloud.points)
+    return cloud

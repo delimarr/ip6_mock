@@ -55,6 +55,7 @@ class BaseConverter:
         self.alive.set()
         print(f"socket ready: {ip}, {port}")
         conn, _ = server_socket.accept()
+        print(f"{ip} {port} got connection")
         while True:
             if not self.buffer.empty():
                 converter_output = self.buffer.get()

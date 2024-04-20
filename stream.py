@@ -1,8 +1,12 @@
 import os
+import pyvista as pv
 from threading import Thread
 
 from replay_converter import ReplayConverter
 from ecos_converter import EcosConverter
+from transform_data import *
+
+DEVICE_IP = "192.168.103.98"
 
 # dab lap
 folder = "./data/got_raw_files/run8/"
@@ -22,7 +26,7 @@ if not os.path.exists(os.path.join(folder, files[0])):
 def replay_gtcommand():
     """Replay raw got files to socket."""
     rp = ReplayConverter(
-        files=files, folder=folder, raw_flg=True, fixed_intervall=0.05
+        ip_server=DEVICE_IP, files=files, folder=folder, raw_flg=True, fixed_intervall=0.05
     )
     rp.read_input()
 
@@ -30,5 +34,5 @@ def replay_gtcommand():
 if __name__ == "__main__":
     Thread(target=replay_gtcommand, daemon=True).start()
 
-    ec = EcosConverter()
+    ec = EcosConverter(ip_server=DEVICE_IP)
     ec.read_input()
